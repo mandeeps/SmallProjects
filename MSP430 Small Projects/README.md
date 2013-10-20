@@ -1,0 +1,1 @@
+Small projects to learn about the TI MSP430 microcontroller and Launchpad.
