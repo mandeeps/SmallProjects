@@ -1,0 +1,6 @@
+-swf-version 8
+-swf GobiCatchLarge.swf
+-swf-header 800:480:30
+-swf-lib resource.swf
+-D flash_lite
+-main GobiCatchLarge

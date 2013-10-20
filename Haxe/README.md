@@ -1,0 +1,3 @@
+These are small Haxe projects from years ago, made to run on a Nintendo Wii running Opera and Flash Lite 3.1 using the Wiimote (or a mouse on a real computer) for controls.
+
+Sure beat having to write Flash 8 compatible ActionScript 2 code...

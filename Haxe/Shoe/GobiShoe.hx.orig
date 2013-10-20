@@ -1,0 +1,41 @@
+// Haxe port of GobiShoe to Flash7/8 for Wii
+
+class GobiShoe {
+	static function main() {
+
+		var movieclip:flash.MovieClip;
+//		var constantAction:Timer;
+		var GobiDir:String = 'left';
+		var Score:Int = 0;
+		var Hit:Bool = false;
+		var GobiSpeed:Int = 10;
+		var HitTimer:Int = 0;
+
+		// creates a TextField
+		var text:flash.TextField;
+		var textform = new flash.TextFormat();
+		text = flash.Lib.current.createTextField("scoretext",0,200,0,100,19);
+		textform.size = 16;
+		text.setNewTextFormat(textform);
+		text._x = 200;
+		text.text = "Score: ";
+
+		var gobi = flash.Lib.current.attachMovie("gobi", "gobi1", 2);
+		gobi._x = 300;
+		gobi._y = 53;
+
+		var gobihit = flash.Lib.current.attachMovie("gobihit", "gh1",1);
+		gobihit._visible = false;
+		var shoe = flash.Lib.current.attachMovie("shoe", 's1',3);
+
+		function mousemove(); {
+		shoe._x = flash.MovieClip._xmouse;
+		shoe._y = flash.MovieClip._ymouse;
+//		flash.Mouse.onMouseUp; {
+//			text.text = "MouseClicked!!!";
+		}
+
+		flash.Mouse.addListener(flash.Mouse.onMouseMove, mousemove);
+		flash.Mouse.hide();
+	}
+}

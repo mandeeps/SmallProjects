@@ -1,0 +1,6 @@
+-swf-version 8
+-swf GobiShoe.swf
+-swf-header 600:200:30
+-swf-lib resource.swf
+-D flash_lite
+-main GobiShoe

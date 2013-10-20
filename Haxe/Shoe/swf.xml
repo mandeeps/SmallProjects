@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<movie width="600" height="200" framerate="30" frames="1" as3="0" version="8">
+	<frame>
+		<library>
+			<clip id="shoe" import="./shoe.png"/>
+			<clip id="gobi" import="./Gobi.png"/>
+			<clip id ="gobihit" import="./GobiHit.png"/>
+		</library>
+	</frame>
+</movie>

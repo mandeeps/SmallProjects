@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>EaselJS Demo1</title>
+    <meta charset="utf-8">
+    <script src="easeljs-0.5.0.min.js"></script>
+    <script>
+/*
+Player causes ball to jump or double jump, must avoid
+pits to make it to the end and win
+*/
+    
+    function init() {
+        stage = new createjs.Stage("demoCanvas");
+        
+        background = new createjs.Shape();
+        background.graphics.beginFill("lightblue").drawRect(0,0,640,480);
+        stage.addChild(background);
+        
+        ground = new createjs.Shape();
+        ground.graphics.beginFill("green").drawRect(0, 420, 640, 480);
+        stage.addChild(ground);
+        
+        cC = new createjs.Shape();
+        cC.graphics.beginFill("orange").drawCircle(0, 0, 20);
+    
+
+        cX = new createjs.Text("|", "38px Arial", "purple");
+        cX.textAlign = "center";
+        cX.textBaseline = "middle";
+
+        circle = new createjs.Container();
+        circle.x = 60;
+        circle.y = circle.floor = 400;
+        circle.jumpUp = false; circle.fallDown = false;
+        circle.speed = 200;
+        circle.maxHeight = 200;
+        circle.count = 0;
+        circle.checkLava = function() {
+            if (!circle.jumpUp && !circle.fallDown) {
+                for (object in spikeList) {
+                    if (circle.x+8 >= spikeList[object].x ) {
+                        return true;
+                    }
+                }
+            }
+            else {return false;}
+        }
+        circle.tick = function(elapsedTime) {
+            circle.rotation += 10;
+            circle.x += (elapsedTime/1000) * circle.speed;
+            if (circle.x > 640) {circle.x = 0; circle.count++;}
+            if (circle.count >= 3) {endGame();}
+            if (circle.y == 400 && circle.x >= 260 && circle.x <= 480) {
+                circle.x = 0; circle.y = 400; circle.count = 0;
+            }
+            if (circle.jumpUp) {
+                circle.y -= (elapsedTime/1000) * circle.speed;
+             
+                if (circle.y <= circle.maxHeight) {circle.jumpUp = false; circle.fallDown = true;}
+            }
+            else if (circle.fallDown) {
+                circle.maxHeight = 200;
+                circle.y += (elapsedTime/1000) * (circle.speed);
+                
+                if (circle.y >= circle.floor) {circle.fallDown = false; circle.y = circle.floor;}
+            }
+        }
+
+        circle.addChild(cC, cX);        
+        stage.addChild(circle);
+
+        hole = new createjs.Shape();
+        hole.graphics.beginFill("lightblue").drawRect(240, 420, 240, 60);
+        stage.addChild(hole);
+ 
+        
+        stage.onMouseDown = function() {
+            if (circle.y == circle.floor ){circle.jumpUp = true;}
+            else if (!circle.fallDown) {circle.maxHeight = 100;}
+        }
+        
+        createjs.Ticker.addListener(window);
+        createjs.Ticker.setFPS(30);
+    }
+    
+    endGame = function() {
+        stage.removeAllChildren();
+        endText = new createjs.Text("You Made It To The End!", "24px Arial", "black");
+        endText.x = 0; endText.y = 320;
+        stage.addChild(endText);
+    }
+    
+    function tick(elapsedTime) {
+        circle.tick(elapsedTime);
+        stage.update();
+    }
+    
+    </script>
+</head>
+<body onLoad="init();">
+    <p><text>Jump Over The Pit 3 Times In A Row!</text></p>
+    <canvas id="demoCanvas" width="640" height="480">
+    </canvas>
+    <p><text>Click On The Game to Jump, Click Again to Jump Higher</text><p>
+</body>
+</html>

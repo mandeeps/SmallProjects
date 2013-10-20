@@ -1,0 +1,10 @@
+{
+  "name": "EaselJS Demo1",
+  "description": "Simple little demo app",
+  "launch_path": "/demo1.html",
+  "developer": {
+    "name": "Mandeep",
+    "url": ""
+  },
+  "orientation": "landscape-primary"
+}
